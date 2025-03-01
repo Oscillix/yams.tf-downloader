@@ -60,7 +60,7 @@ def download_file(client, download_url, referrer_url):
     redirect = third_request.headers.get('Hx-Redirect')
     fourth_request = client.get(
         "https://buzzheavier.com" + redirect,
-        headers={"referrer": referrer_url, "User-Agent": USER_AGENT}
+        headers={"referrer": referrer_url, "User-Agent": USER_AGENT},
         stream=True
     )
     
