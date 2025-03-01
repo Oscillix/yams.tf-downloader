@@ -4,6 +4,8 @@ import zipfile
 import os
 import re
 
+USER_AGENT = "yams.tf-downloader/1.0 (+https://github.com/Oscillix/yams.tf-downloader)"
+
 def log_message(message, start_time, end="\n"):
     elapsed_time = time.time() - start_time
     print(f"[{elapsed_time:.2f}s] {message}", end=end, flush=True)
@@ -22,9 +24,7 @@ def download_song(url):
             "host": "buzzheavier",
             "account": "none"
         },
-        headers={
-            "User-Agent": "yams.tf-downloader/v1",
-        }
+        headers={"User-Agent": USER_AGENT}
     ).json()
     log_message("Got yams id!", start_time)
     return first_request
@@ -55,18 +55,12 @@ def download_file(client, download_url, referrer_url):
     start_time = time.time()
     third_request = client.get(
         f"{download_url}/download",
-        headers={
-            "referrer": referrer_url,
-            "User-Agent": "yams.tf-downloader/v1",
-        }
+        headers={"referrer": referrer_url, "User-Agent": USER_AGENT}
     )
     redirect = third_request.headers.get('Hx-Redirect')
     fourth_request = client.get(
         "https://buzzheavier.com" + redirect,
-        headers={
-            "referrer": referrer_url,
-            "User-Agent": "yams.tf-downloader/v1",
-        },
+        headers={"referrer": referrer_url, "User-Agent": USER_AGENT}
         stream=True
     )
     
