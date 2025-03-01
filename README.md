@@ -12,4 +12,4 @@
 - Install dependencies before running the script: <code>pip install requests</code>
 
 ## Usage  
-1. Run the script: <code>python downloader.py</code>
+1. Run the script: <code>python yams_downloader.py</code>
